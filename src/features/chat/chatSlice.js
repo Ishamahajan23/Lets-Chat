@@ -1,35 +1,46 @@
+// src/features/chat/chatSlice.js
 import { createSlice } from '@reduxjs/toolkit';
-
-const initialState = {
-  messages: [],
-  activeChat: null,
-};
 
 const chatSlice = createSlice({
   name: 'chat',
-  initialState,
+  initialState: {
+    currentChatId: null,
+    messages: {}, 
+    viewOnceMessages: {}, 
+  },
   reducers: {
-    setActiveChat(state, action) {
-      state.activeChat = action.payload;
+    setCurrentChatId: (state, action) => {
+      state.currentChatId = action.payload;
     },
-    addMessage(state, action) {
-      state.messages.push(action.payload);
+    addMessage: (state, action) => {
+      const { chatId, message } = action.payload;
+      if (!state.messages[chatId]) state.messages[chatId] = [];
+      state.messages[chatId].push(message);
     },
-    tagFriend(state, action) {
-      const { messageId, friendId } = action.payload;
-      const message = state.messages.find((msg) => msg.id === messageId);
-      if (message) {
-        message.taggedFriends = [...(message.taggedFriends || []), friendId];
+    addViewOnceMessage: (state, action) => {
+      const { chatId, messageId } = action.payload;
+      if (!state.viewOnceMessages[chatId]) state.viewOnceMessages[chatId] = new Set();
+      state.viewOnceMessages[chatId].add(messageId);
+    },
+    removeViewOnceMessage: (state, action) => {
+      const { chatId, messageId } = action.payload;
+      if (state.viewOnceMessages[chatId]) {
+        state.viewOnceMessages[chatId].delete(messageId);
       }
     },
-    viewOnceMessage(state, action) {
-      const message = state.messages.find((msg) => msg.id === action.payload);
-      if (message) {
-        message.text = '**';
-      }
+    setMessages: (state, action) => {
+      const { chatId, messages } = action.payload;
+      state.messages[chatId] = messages;
     },
   },
 });
 
-export const { setActiveChat, addMessage, tagFriend, viewOnceMessage } = chatSlice.actions;
+export const {
+  setCurrentChatId,
+  addMessage,
+  addViewOnceMessage,
+  removeViewOnceMessage,
+  setMessages,
+} = chatSlice.actions;
+
 export default chatSlice.reducer;

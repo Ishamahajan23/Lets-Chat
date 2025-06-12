@@ -1,22 +1,44 @@
+// src/features/ui/uiSlice.js
 import { createSlice } from '@reduxjs/toolkit';
-
-const initialState = {
-  theme: 'light',
-  notifications: [],
-};
 
 const uiSlice = createSlice({
   name: 'ui',
-  initialState,
+  initialState: {
+    darkMode: false,
+    showModal: false,
+    modalContent: null,
+    notifications: [],
+  },
   reducers: {
-    toggleTheme(state) {
-      state.theme = state.theme === 'light' ? 'dark' : 'light';
+    toggleDarkMode: (state) => {
+      state.darkMode = !state.darkMode;
     },
-    addNotification(state, action) {
+    showModal: (state, action) => {
+      state.showModal = true;
+      state.modalContent = action.payload;
+    },
+    hideModal: (state) => {
+      state.showModal = false;
+      state.modalContent = null;
+    },
+    addNotification: (state, action) => {
       state.notifications.push(action.payload);
+    },
+    removeNotification: (state, action) => {
+      state.notifications = state.notifications.filter(
+        (notif) => notif.id !== action.payload
+      );
     },
   },
 });
 
-export const { toggleTheme, addNotification } = uiSlice.actions;
+export const {
+  toggleDarkMode,
+  showModal,
+  hideModal,
+  addNotification,
+  removeNotification,
+} = uiSlice.actions;
+
 export default uiSlice.reducer;
+

@@ -1,12 +1,43 @@
-# React + Vite
+# Let's Chat
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A feature-rich chat application built with React, Tailwind CSS, and Firebase. It supports individual and group chats, tagging, video calling, and more.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Core Features
+- **User Registration and Login**: Secure authentication via email and password.
+- **Individual Chat**: One-on-one messaging with notifications.
+- **Group Chat**: Create and manage group chats with admin roles.
 
-## Expanding the ESLint configuration
+### Unique Features
+- **Tagging Friends**: Tag friends for easy access to discussions.
+- **View Once Messages**: Messages that disappear after being viewed.
+- **Public and Secured Chats**: Public rooms for all users and secured rooms requiring authentication.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Additional Features
+- **Video Calling**: Real-time video calls for groups and individuals.
+- **Dark Mode**: Toggle between light and dark themes.
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices.
+
+## Tech Stack
+- **Frontend**: React, Tailwind CSS
+- **Backend**: Firebase Realtime Database
+- **State Management**: Redux Toolkit
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo/lets-chat.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## License
+This project is licensed under the MIT License.

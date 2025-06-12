@@ -1,14 +1,15 @@
-import React, { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
+// src/components/Shared/ToggleTheme.jsx
+import React from 'react';
 
-function ToggleTheme() {
-  const { theme, toggleTheme } = useContext(ThemeContext);
-
+const ToggleTheme = ({ theme, onToggle }) => {
   return (
-    <button onClick={toggleTheme}>
-      Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode
+    <button
+      onClick={onToggle}
+      className="text-sm bg-gray-300 dark:bg-gray-600 text-gray-900 dark:text-white px-3 py-1 rounded"
+    >
+      {theme === 'dark' ? '☀ Light' : '🌙 Dark'}
     </button>
   );
-}
+};
 
 export default ToggleTheme;

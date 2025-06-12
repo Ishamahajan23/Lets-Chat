@@ -1,28 +1,36 @@
 {
   "name": "lets-chat",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@emoji-mart/react": "^1.1.1",
+    "@heroicons/react": "^1.0.6",
     "@material-tailwind/react": "^2.1.10",
     "@reduxjs/toolkit": "^2.8.2",
     "@tailwindcss/vite": "^4.1.8",
+    "autoprefixer": "^10.4.21",
     "axios": "^1.9.0",
-    "firebase": "^11.9.0",
+    "emoji-picker-react": "^4.12.2",
+    "firebase": "^11.9.1",
     "lucide-react": "^0.513.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "postcss": "^8.5.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.2",
+    "react-toastify": "^11.0.5",
     "redux": "^5.0.1",
-    "tailwindcss": "^4.1.8"
+    "tailwindcss": "^4.1.10",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

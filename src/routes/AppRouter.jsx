@@ -1,39 +1,43 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Login from '../pages/Auth/Login';
 import Register from '../pages/Auth/Register';
-import Home from '../pages/Home';
-import ChatRoom from '../pages/ChatRoom';
-import Tagged from '../pages/Tagged';
+import { ChatWindow } from '../pages/ChatWindow';
 import Settings from '../pages/Settings';
-import VideoCall from '../pages/VideoCall';
-import PublicChat from '../pages/PublicChat';
-import SecuredChat from '../pages/SecuredChat';
-import ProtectedRoute from '../components/Shared/ProtectedRoute';
+import  ChatLayout  from '../pages/ChatLayout';
+import  ChatRoom from '../pages/ChatRoom';
 
-function AppRouter() {
+const ProtectedRoute = ({ children }) => {
+  const user = useSelector((state) => state.auth.user);
+  return user ? children : <Navigate to="/login" />;
+};
+
+export const AppRouter = ({ darkMode, toggleDarkMode }) => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/chatroom" element={<ChatRoom />} />
-        <Route path="/tagged" element={<Tagged />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/video-call" element={<VideoCall />} />
-        <Route path="/public-chat" element={<PublicChat />} />
-        <Route
-          path="/secured-chat"
-          element={
-            <ProtectedRoute>
-              <SecuredChat />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/login" element={<Login darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
+      <Route path="/register" element={<Register darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
+      <Route path="/chatwindow" element={
+        <ProtectedRoute>
+          <ChatWindow darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        </ProtectedRoute>
+      } />
+      <Route path="/chatlayout" element={
+        <ProtectedRoute>
+          <ChatLayout darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        </ProtectedRoute>
+      } />
+      <Route  path="/chat/:id/:name" element={
+        <ProtectedRoute>
+          <ChatRoom darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        </ProtectedRoute>
+      }/>
+      <Route path="/settings" element={
+        <ProtectedRoute>
+          <Settings darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        </ProtectedRoute>
+      } />
+    </Routes>
   );
-}
-
-export default AppRouter;
+};
