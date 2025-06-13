@@ -10,7 +10,13 @@ const MessageBubble = ({ message, isMe }) => {
       }`}
     >
       <p>{message.text}</p>
-      <p className="text-xl text-black">{message.timestamp}</p>
+      <p className="text-xs text-gray-500">
+        {new Date(message.timestamp).toLocaleTimeString([], {
+          hour: '2-digit',
+          minute: '2-digit',
+        })}
+      </p>
+      <p className="text-xs text-gray-400">{message.senderName}</p> {/* Display sender's name */}
     </div>
   );
 };

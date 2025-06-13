@@ -1,25 +1,33 @@
 import React, { useState } from 'react';
 import { register } from '../../utils/auth';
 import Loader from '../../components/Shared/Loader';
+import { useNavigate } from 'react-router-dom';
 
 function Register({ darkMode, toggleDarkMode }) {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
+    const name = event.target.name.value;
+    const mobile = event.target.mobile.value;
 
     setLoading(true);
 
     try {
-      await register(email, password); 
+      await register(email, password, name, mobile); 
       setSuccess('Registration successful! You can now log in.');
+
       setError('');
+      navigate("/login")
     } catch (err) {
-      setError(err.message);
+
+      console.error('Registration error:', err);
+      setError("Registration failed. Please check your email and password.");
       setSuccess('');
     }
     setLoading(false);
@@ -40,6 +48,29 @@ function Register({ darkMode, toggleDarkMode }) {
       </button>
       <h1 className="text-3xl font-bold mb-6">Sign Up</h1>
       <form className="w-96 bg-white p-6 rounded-lg shadow-md" onSubmit={handleSubmit}>
+     
+
+        <div className="mb-4">
+          <label htmlFor="name" className="block text-sm font-medium mb-2 text-left text-black">Name</label>
+          <input
+            type="text"
+            id="name"
+            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter your name"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="mobile" className="block text-sm font-medium mb-2 text-left text-black">Mobile Number</label>
+          <input
+            type="tel"
+            id="mobile"
+            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter your mobile number"
+            required
+          />
+        </div>
+  
         <div className="mb-4">
           <label htmlFor="email" className="block text-sm font-medium mb-2 text-left text-black">Email</label>
           <input

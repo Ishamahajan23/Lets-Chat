@@ -2,11 +2,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Moon, Sun, MessageCircle, Users, Settings, LogOut , Search} from 'lucide-react';
+import { Moon, Sun, MessageCircle, Users, Settings, LogOut , Search, Bell} from 'lucide-react';
 import { logout as logoutAction } from '../../features/auth/authSlice';
+
 import { logout as firebaseLogout } from '../../utils/auth';
-import ChatList from '../Chat/ChatList';
-import GroupList from '../Groups/GroupList';
+
+import Notification from './Notification';
 
 const Sidebar = ({ darkMode, toggleDarkMode }) => {
 
@@ -29,7 +30,7 @@ const Sidebar = ({ darkMode, toggleDarkMode }) => {
     <div className={`flex flex-col h-screen w-85 p-4 fixed ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} shadow-lg transition-colors duration-300 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
       <div className="mb-6 text-2xl font-bold tracking-wide">Let's Chat</div>
 
-      <nav className="flex-1 space-y-4">
+      <nav className="flex  flex-col space-y-4">
        
         <Link to="/chatlayout" className="flex items-center gap-2 hover:text-blue-500">
           <MessageCircle size={20} /> Messages
@@ -42,7 +43,14 @@ const Sidebar = ({ darkMode, toggleDarkMode }) => {
         <Link to="/settings" className="flex items-center gap-2 hover:text-blue-500">
           <Settings size={20} /> Settings
         </Link>
+
+        
+         
+     
       </nav>
+      <div className="">
+          <Notification darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      </div>
 
       <div className="mt-auto space-y-4">
         <button onClick={toggleDarkMode} className="flex items-center gap-2 cursor-pointer">

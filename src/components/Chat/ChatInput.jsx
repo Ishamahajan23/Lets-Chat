@@ -3,27 +3,41 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { writeMessage } from '../../utils/firebase';
 import EmojiPicker from 'emoji-picker-react';
+import { ref, push } from 'firebase/database';
+import { db } from '../../utils/firebase';
 
 const ChatInput = ({ chatId }) => {
   const [text, setText] = useState('');
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-  const [taggedUser, setTaggedUser] = useState('');
   const user = useSelector((state) => state.auth.user);
- 
 
   const handleSend = async () => {
     if (!text.trim()) return;
+    const receiverId = chatId; 
     await writeMessage(chatId, {
-      text: taggedUser ? `@${taggedUser}: ${text}` : text,
+      text,
       senderId: user.uid,
-      senderName: user.email,
+      senderName: user.name || user.email,
+      receiverId,
     });
+
+   
+    const notificationsRef = ref(db, `users/${receiverId}/notifications`);
+    await push(notificationsRef, {
+      message: `New message from ${user.email}: ${text}`,
+      senderId: user.uid,
+      senderName: user.name || user.email,
+      chatId,
+      read: false,
+      timestamp: Date.now(),
+    });
+    
+
     setText('');
-    setTaggedUser('');
   };
 
   const handleEmojiSelect = (emojiObject) => {
-    setText((prev) => prev + emojiObject.emoji); 
+    setText((prev) => prev + emojiObject.emoji);
     setShowEmojiPicker(false);
   };
 
@@ -40,7 +54,6 @@ const ChatInput = ({ chatId }) => {
           <EmojiPicker onEmojiClick={(emojiObject) => handleEmojiSelect(emojiObject)} />
         </div>
       )}
-     
       <input
         className="flex-1 rounded-md p-2 border dark:bg-gray-500 dark:border-gray-600 dark:text-white"
         value={text}

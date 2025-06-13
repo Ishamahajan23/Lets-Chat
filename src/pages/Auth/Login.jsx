@@ -22,7 +22,8 @@ function Login({ darkMode, toggleDarkMode }) {
         navigate('/chatwindow');
       }
     } catch (err) {
-      setError(err.message);
+      console.error('Login error:', err);
+      setError("Login failed. Please check your email and password.");
     }
     setLoading(false);
   };
