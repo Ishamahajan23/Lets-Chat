@@ -11,7 +11,7 @@ const ChatLayout = ({ darkMode }) => {
 
   useEffect(() => {
     if (!currentUser) {
-      navigate('/login');
+      navigate('/');
       return;
     }
 
@@ -66,32 +66,26 @@ const ChatLayout = ({ darkMode }) => {
   }
  
   return (
-    <div className={`flex h-screen w-4/5 ml-auto ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-900'} transition-colors duration-300`}>
-      <aside className="w-1/4 border-r flex flex-col p-4">
-        <h2 className="text-xl font-bold mb-4">All Users</h2>
-        <ul className="space-y-4">
+    <div className={`flex  md:ml-80 h-screen w-full md:w-4/5 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-900'} transition-colors duration-300`}>
+      <aside className="w-full md:w-full flex flex-col p-4">
+        <h2 className="text-xl font-bold mb-4 text-center md:text-left">All Users</h2>
+        <ul className="space-y-4 overflow-y-auto">
           {users.map((user) => (
             <li
               key={user.id}
-              className={`flex items-center p-2 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-900'} rounded shadow hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer`}
+              className={`flex w-full items-center p-2 ${darkMode ? 'bg-gray-900 text-gray-100 border border-gray-100' : 'bg-gray-100 text-gray-900 border border-gray-200'} rounded shadow hover:bg-gray-100 dark:hover:bg-gray-500 dark:hover:text-white  cursor-pointer`}
               onClick={() => handleClick(user.id, user.name || user.email)}
             >
               <div className="flex-1">
-                <h3 className="font-semibold">{user.name || user.email}</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400">{user.lastMessage ? `last: ${user.lastMessage.text}` : 'No messages yet'}</p>
+                <h3 className="font-semibold truncate">{user.name || user.email}</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 truncate">{user.lastMessage ? `last: ${user.lastMessage.text}` : 'No messages yet'}</p>
               </div>
-                
               <span className="text-xs text-gray-400">{new Date(user.lastMessage ? user.lastMessage.timestamp : Date.now()).toLocaleTimeString()}</span>
             </li>
           ))}
         </ul>
       </aside>
-      <main className="flex-1 p-4">
-        <div className="text-center flex flex-col items-center justify-center h-full">
-          <h3 className="text-xl font-semibold mb-2">Welcome to Let's Chat</h3>
-          <p>Select a user to start messaging</p>
-        </div>
-      </main>
+     
     </div>
   );
 };

@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import ChatInput from '../components/Chat/ChatInput';
 import MessageList from '../components/Chat/MessageList';
 import { ArrowLeft, VideoIcon } from 'lucide-react';
-//imort user deatils
 import { db } from '../utils/firebase';
 import { ref, onValue, } from 'firebase/database';
 
@@ -36,13 +35,13 @@ const ChatRoom = ({ darkMode }) => {
   };
 
   return (
-    <div className={`w-4/5  ml-auto flex flex-col h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
-      <header className="flex items-center p-4 border-b dark:border-gray-700">
-        <div className="flex items-center">
-        <button onClick={handleGoBack} className="mr-4">
+    <div className={`flex  md:ml-80 h-screen w-full md:w-4/5 flex-col h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
+      <header className="flex items-center  p-4 border-b dark:border-gray-700">
+        <div className="flex items-center justify-center md:justify-start flex-1">
+        <button onClick={handleGoBack} className="mr-10 ">
           <ArrowLeft size={24} />
         </button>
-        <h2 className="text-xl font-bold">Chat Room - {name}</h2>
+        <h2 className="text-xl font-bold truncate ">Chat Room - {name}</h2>
         </div>
         <div className="ml-auto flex items-center">
          

@@ -1,4 +1,3 @@
-// src/components/Shared/ToggleTheme.jsx
 import React from 'react';
 
 const ToggleTheme = ({ theme, onToggle }) => {

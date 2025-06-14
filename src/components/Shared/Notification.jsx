@@ -55,7 +55,7 @@ const Notification = ({ darkMode}) => {
     <div className={`my-4 ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} shadow-lg transition-colors duration-300 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'} p-4 rounded`}>
       <div className='flex justify-between items-center mb-4'>
         <h3 className="text-lg font-bold mb-2 flex gap-2"> <span className='flex justify-center items-center'><Bell size={20} /></span> Notifications </h3>
-        <p className="flex items-center gap-2 text-sm " onClick={handleClearAll}> <Trash2 size={17} /> Clear All </p>
+        <p className="flex items-center gap-1 md:gap-2  text-sm  " onClick={handleClearAll}> <Trash2 size={17} /> Clear All </p>
       </div>
       <ul className="space-y-2">
         {notifications.map((notification) => (

@@ -1,4 +1,4 @@
-// src/features/chat/chatSlice.js
+
 import { createSlice } from '@reduxjs/toolkit';
 
 const chatSlice = createSlice({

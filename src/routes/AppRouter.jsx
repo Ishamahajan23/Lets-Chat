@@ -7,18 +7,20 @@ import { ChatWindow } from "../pages/ChatWindow";
 import Settings from "../pages/Settings";
 import ChatLayout from "../pages/ChatLayout";
 import ChatRoom from "../pages/ChatRoom";
+import GroupList from "../components/Groups/GroupList";
+import GroupChats from "../components/Groups/GroupChats";
 
 
 const ProtectedRoute = ({ children }) => {
   const user = useSelector((state) => state.auth.user);
-  return user ? children : <Navigate to="/login" />;
+  return user ? children : <Navigate to="/" />;
 };
 
 export const AppRouter = ({ darkMode, toggleDarkMode }) => {
   return (
     <Routes>
       <Route
-        path="/login"
+        path="/"
         element={<Login darkMode={darkMode} toggleDarkMode={toggleDarkMode} />}
       />
       <Route
@@ -56,6 +58,22 @@ export const AppRouter = ({ darkMode, toggleDarkMode }) => {
         element={
           <ProtectedRoute>
             <Settings darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+          </ProtectedRoute>
+        }
+      />
+      <Route 
+        path="/groups"
+        element={
+          <ProtectedRoute>
+            <GroupList darkMode={darkMode} />
+          </ProtectedRoute>
+        }
+      />
+       <Route
+        path="/group/:id/:name"
+        element={
+          <ProtectedRoute>
+            <GroupChats darkMode={darkMode} />
           </ProtectedRoute>
         }
       />

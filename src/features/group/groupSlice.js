@@ -1,10 +1,10 @@
-// src/features/group/groupSlice.js
+
 import { createSlice } from '@reduxjs/toolkit';
 
 const groupSlice = createSlice({
   name: 'group',
   initialState: {
-    groups: [], // list of group objects
+    groups: [], 
     selectedGroupId: null,
   },
   reducers: {

@@ -1,4 +1,4 @@
-// src/components/Chat/ChatList.jsx
+
 import React from 'react';
 
 const ChatList = () => {

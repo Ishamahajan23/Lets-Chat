@@ -39,5 +39,4 @@ A feature-rich chat application built with React, Tailwind CSS, and Firebase. It
    npm run dev
    ```
 
-## License
-This project is licensed under the MIT License.
+

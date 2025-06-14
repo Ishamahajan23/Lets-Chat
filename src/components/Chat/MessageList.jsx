@@ -50,13 +50,19 @@ const MessageList = ({ chatId }) => {
   return (
     <div className="p-4 space-y-4">
       {messages.map((message) => (
-        <div key={message.id} className={`flex gap-2 ${message.senderId === user.uid ? ' justify-end' : 'justify-start'}`}>
+        <div key={message.id} className={`flex gap-2 ${message.senderId === user.uid ? 'justify-end' : 'justify-start'}`}>
           <MessageBubble
             key={message.id}
             message={message}
             isMe={message.senderId === user.uid}
           />
-          <Trash2 size={14} onClick={() => handleDeleteMsg(message.id)}/>
+          {message.senderId === user.uid && (
+            <Trash2
+              size={16}
+              className="cursor-pointer text-gray-500 hover:text-red-500"
+              onClick={() => handleDeleteMsg(message.id)}
+            />
+          )}
         </div>
       ))}
       {messages.length === 0 && (

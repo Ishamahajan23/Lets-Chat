@@ -23,7 +23,7 @@ function Register({ darkMode, toggleDarkMode }) {
       setSuccess('Registration successful! You can now log in.');
 
       setError('');
-      navigate("/login")
+      navigate("/")
     } catch (err) {
 
       console.error('Registration error:', err);
@@ -98,7 +98,7 @@ function Register({ darkMode, toggleDarkMode }) {
         {success && <p className="mt-4 text-sm text-green-500">{success}</p>}
     
         <p className="mt-4 text-sm text-gray-600">
-          Already have an account? <a href="/login" className="text-blue-500 hover:underline">Login</a>
+          Already have an account? <a href="/" className="text-blue-500 hover:underline">Login</a>
         </p>
       </form>
     </div>

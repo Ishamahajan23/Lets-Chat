@@ -1,4 +1,4 @@
-// src/components/Chat/ChatInput.jsx
+
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { writeMessage } from '../../utils/firebase';
@@ -31,7 +31,7 @@ const ChatInput = ({ chatId }) => {
       read: false,
       timestamp: Date.now(),
     });
-    
+
 
     setText('');
   };
