@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { login } from '../../utils/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Loader from '../../components/Shared/Loader';
 
 function Login({ darkMode, toggleDarkMode }) {
