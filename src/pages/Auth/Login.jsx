@@ -69,7 +69,7 @@ function Login({ darkMode, toggleDarkMode }) {
         {error && <p className="mt-4 text-sm text-red-500">{error}</p>}
         
         <p className="mt-4 text-sm text-gray-600">
-          Don't have an account? <a href="/register" className="text-blue-500 hover:underline">Sign Up</a>
+          Don't have an account? <Link to="/register" className="text-blue-500 hover:underline">Sign Up</Link>
         </p>
       </form>
     </div>
