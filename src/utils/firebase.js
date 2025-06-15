@@ -57,6 +57,7 @@ export const writeMessage = async (chatId, message) => {
 export const writeGroupMessage = async (groupId, message, taggedUsers = []) => {
   try {
     const messagesRef = ref(db, `groups/${groupId}/messages`);
+    
 
     const messageWithTimestamp = {
       ...message,

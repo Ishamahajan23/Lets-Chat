@@ -62,9 +62,10 @@ const GroupList = ({ darkMode }) => {
   };
 
   return (
-    <div className={`flex flex-col  md:ml-80 h-screen w-full md:w-4/5 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-900'} transition-colors duration-300} space-y-4 overflow-y-auto   p-2`}>
-      <h2 className="text-xl font-bold mb-4">Groups</h2>
-      <div className="mb-4">
+    <div className={`flex flex-col md:ml-80 mt-5 md:mt-0 h-screen w-full md:w-4/5 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-900'} transition-colors duration-300} space-y-4 overflow-y-auto   p-2`}>
+      <h2 className="text-xl font-bold mb-4 text-center md:text-left">Groups</h2>
+      <div className="mb-4 flex  flex-col gap-2 justify-center">
+        <div className="flex justify-center gap-2 ">
         <input
           type="text"
           placeholder="Group Name"
@@ -92,6 +93,8 @@ const GroupList = ({ darkMode }) => {
             </option>
           ))}
         </select>
+        </div>
+       
         <button
           onClick={() => setShowSelectedUsers(!showSelectedUsers)} 
           className="mt-2 bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600"
@@ -125,7 +128,7 @@ const GroupList = ({ darkMode }) => {
         {groups.map((group) => (
           <li
             key={group.id}
-            className="p-2 border rounded cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700"
+            className="p-2 border rounded cursor-pointer hover:bg-gray-200 hover:text-black"
             onClick={() => handleGroupClick(group.id, group.name)}
           >
             {group.name}

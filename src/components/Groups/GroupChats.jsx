@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { ref, onValue, push } from 'firebase/database';
+import { ref, onValue, push, remove } from 'firebase/database';
 import { db } from '../../utils/firebase';
 import GroupInput from './GroupInput';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Trash2 } from 'lucide-react';
 
 import MessageBubble from '../Chat/MessageBubble'; 
 const GroupChat = ({ darkMode }) => {
@@ -40,6 +40,17 @@ const GroupChat = ({ darkMode }) => {
     navigate('/groups');
   };
 
+  const handleDeleteMsg = (messageId) => {
+    const messageRef = ref(db, `groups/${id}/messages/${messageId}`);
+    remove(messageRef)
+      .then(() => {
+        console.log('Message deleted successfully');
+      })
+      .catch((error) => {
+        console.error('Error deleting message:', error);
+      });
+  };
+
   return (
     <div className={`flex md:ml-80 h-screen w-full md:w-4/5 flex-col ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
       <header className="flex items-center p-4 border-b dark:border-gray-700">
@@ -52,11 +63,19 @@ const GroupChat = ({ darkMode }) => {
       </header>
       <main className="flex-1 overflow-y-auto p-4 space-y-4 flex flex-col justify-start items-center">
         {messages.map((message) => (
-          <MessageBubble
-            key={message.id}
-            message={message}
-            isMe={message.senderId === user.uid}
-          />
+          <div key={message.id} className={`flex gap-2 ${message.senderId === user.uid ? 'justify-end' : 'justify-start'} w-full`}>
+            <MessageBubble
+              message={message}
+              isMe={message.senderId === user.uid}
+            />
+            {message.senderId === user.uid && (
+              <Trash2
+                size={16}
+                className="cursor-pointer text-gray-500 hover:text-red-500"
+                onClick={() => handleDeleteMsg(message.id)}
+              />
+            )}
+          </div>
         ))}
       </main>
       <footer>
